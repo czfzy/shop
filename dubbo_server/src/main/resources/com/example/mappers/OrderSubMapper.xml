@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mappers.OrderSubMapper">
+  <resultMap id="BaseResultMap" type="com.example.pojo.OrderSub">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="uid" jdbcType="BIGINT" property="uid" />
+    <result column="shop_id" jdbcType="BIGINT" property="shopId" />
+    <result column="shop_name" jdbcType="VARCHAR" property="shopName" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="pay_price" jdbcType="DECIMAL" property="payPrice" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="express_price" jdbcType="DECIMAL" property="expressPrice" />
+    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+    <result column="pay_status" jdbcType="BIT" property="payStatus" />
+    <result column="pay_model" jdbcType="BIT" property="payModel" />
+    <result column="exchange_type" jdbcType="BIT" property="exchangeType" />
+    <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <select id="countByTime" resultType="java.lang.Integer" parameterType="map">
+    select count(1) from order_sub
+    where UNIX_TIMESTAMP(create_time) &gt;= #{start} and
+    UNIX_TIMESTAMP(create_time) &lt;= #{end}
+    <if test="shopId > 0">
+      and shop_id = ${shopId}
+    </if>
+  </select>
+
+  <select id="sumTotalPrice" resultType="java.lang.Double" parameterType="map">
+    select IFNULL(sum(pay_price),0) from order_sub where pay_status = 0
+    <if test="shopId > 0">
+      and shop_id = ${shopId}
+    </if>
+  </select>
+
+  <select id="orderStatusList" resultType="com.example.pojo.OrderCount" parameterType="map">
+    select order_status as name, count(order_status) as value from order_sub
+    <if test="shopId > 0">
+      <!--and shop_id = ${shopId}-->
+    </if>
+    GROUP BY order_status
+  </select>
+
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mappers.OrderItemMapper">
+  <resultMap id="BaseResultMap" type="com.example.pojo.OrderItem">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sub_id" jdbcType="BIGINT" property="subId" />
+    <result column="goods_id" jdbcType="BIGINT" property="goodsId" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goods_spec" jdbcType="VARCHAR" property="goodsSpec" />
+    <result column="sell_price" jdbcType="DECIMAL" property="sellPrice" />
+    <result column="pay_price" jdbcType="DECIMAL" property="payPrice" />
+    <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <result column="discount_type" jdbcType="INTEGER" property="discountType" />
+    <result column="pay_status" jdbcType="TINYINT" property="payStatus" />
+    <result column="item_status" jdbcType="TINYINT" property="itemStatus" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+</mapper>

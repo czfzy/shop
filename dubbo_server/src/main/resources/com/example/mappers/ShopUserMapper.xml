@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mappers.ShopUserMapper">
+  <resultMap id="BaseResultMap" type="com.example.pojo.ShopUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="shop_id" jdbcType="BIGINT" property="shopId" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <select id="find" resultType="com.example.pojo.ShopUser">
+        SELECT * FROM shop_user where id=#{id}
+    </select>
+  <select id="findByName" resultType="com.example.pojo.ShopUser">
+        SELECT * FROM shop_user where name=#{name}
+  </select>
+
+</mapper>

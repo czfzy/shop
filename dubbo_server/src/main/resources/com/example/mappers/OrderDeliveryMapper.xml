@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mappers.OrderDeliveryMapper">
+  <resultMap id="BaseResultMap" type="com.example.pojo.OrderDelivery">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="sub_id" jdbcType="BIGINT" property="subId" />
+    <result column="recive_name" jdbcType="VARCHAR" property="reciveName" />
+    <result column="recive_province" jdbcType="INTEGER" property="reciveProvince" />
+    <result column="recive_city" jdbcType="INTEGER" property="reciveCity" />
+    <result column="recive_area" jdbcType="INTEGER" property="reciveArea" />
+    <result column="recive_address" jdbcType="VARCHAR" property="reciveAddress" />
+    <result column="recive_tel" jdbcType="VARCHAR" property="reciveTel" />
+    <result column="recive_email" jdbcType="VARCHAR" property="reciveEmail" />
+    <result column="post_id" jdbcType="VARCHAR" property="postId" />
+    <result column="post_status" jdbcType="TINYINT" property="postStatus" />
+    <result column="post_fee" jdbcType="DECIMAL" property="postFee" />
+    <result column="post_time" jdbcType="TIMESTAMP" property="postTime" />
+    <result column="delivery_time" jdbcType="TIMESTAMP" property="deliveryTime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+</mapper>

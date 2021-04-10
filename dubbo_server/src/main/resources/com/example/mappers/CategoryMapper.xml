@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mappers.CategoryMapper">
+  <resultMap id="BaseResultMap" type="com.example.pojo.Category">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="level" jdbcType="BIT" property="level" />
+    <result column="sort" jdbcType="BIT" property="sort" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="delete_flag" jdbcType="BIT" property="deleteFlag" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <resultMap id="childMap" type="com.example.pojo.Category">
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="level" jdbcType="BIT" property="level" />
+    <result column="sort" jdbcType="BIT" property="sort" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <collection property="children" ofType="com.example.pojo.Category">
+      <id column="id2" jdbcType="BIGINT" property="id"/>
+      <result column="name2" jdbcType="VARCHAR" property="name"/>
+      <result column="level2" jdbcType="BIT" property="level"/>
+      <result column="sort2" jdbcType="BIT" property="sort"/>
+      <result column="pid2" jdbcType="INTEGER" property="pid"/>
+      <result column="status2" jdbcType="BIT" property="status"/>
+      <collection property="children" ofType="com.example.pojo.Category">
+        <id column="id3" jdbcType="BIGINT" property="id"/>
+        <result column="name3" jdbcType="VARCHAR" property="name"/>
+        <result column="level3" jdbcType="BIT" property="level"/>
+        <result column="sort3" jdbcType="BIT" property="sort"/>
+        <result column="pid3" jdbcType="INTEGER" property="pid"/>
+        <result column="status3" jdbcType="BIT" property="status"/>
+      </collection>
+    </collection>
+  </resultMap>
+
+  <resultMap id="childMapLevel2" type="com.example.pojo.Category">
+    <id column="id" jdbcType="BIGINT" property="id"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="level" jdbcType="BIT" property="level"/>
+    <result column="sort" jdbcType="BIT" property="sort"/>
+    <result column="pid" jdbcType="INTEGER" property="pid"/>
+    <result column="status" jdbcType="BIT" property="status"/>
+    <collection property="children" ofType="com.example.pojo.Category">
+      <id column="id2" jdbcType="BIGINT" property="id"/>
+      <result column="name2" jdbcType="VARCHAR" property="name"/>
+      <result column="level2" jdbcType="BIT" property="level"/>
+      <result column="sort2" jdbcType="BIT" property="sort"/>
+      <result column="pid2" jdbcType="INTEGER" property="pid"/>
+      <result column="status2" jdbcType="BIT" property="status"/>
+    </collection>
+  </resultMap>
+
+  <!--商品分类列表-->
+  <select id="list" resultMap="childMap">
+        SELECT t1.id,t1.name,t1.pid,t1.status,t1.level,t1.sort,
+        t2.id id2,t2.name name2,t1.pid pid2,t2.status status2,t2.level level2,t1.sort sort2,
+        t3.id id3,t3.name name3,t1.pid pid3,t3.status status3,t3.level level3,t1.sort sort3
+        FROM category t1, category t2, category t3
+        WHERE t1.id=t2.pid AND t2.id=t3.pid AND t1.level=1
+    </select>
+
+  <!--两级商品分类-->
+  <select id="listLevel2" resultMap="childMapLevel2">
+        SELECT t1.id,t1.name,t1.status,t1.level,
+        t2.id id2,t2.name name2,t2.status status2,t2.level level2
+        FROM category t1, category t2
+        WHERE t1.id=t2.pid AND t1.level=1
+    </select>
+
+</mapper>
